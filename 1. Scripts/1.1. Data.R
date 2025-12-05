@@ -24,6 +24,10 @@ soccer_data <- na.omit(soccer_data)
 soccer_data <- subset(soccer_data, nIAT > 100)
 soccer_data <- subset(soccer_data, nExp > 100)
 
+#Average skin tone ratings between rater 1 and rater 2
+soccer_data <- soccer_data %>%
+  mutate(avg_rating = rater1 + rater2 / 2)
+
 #Rename positions to fit a 4-2-3-1 Soccer formation
 #This formation consists of 4 defenders (two centerbacks and two fullbacks),
 #two defensive midfielders, three attacking midfielders, and one striker, along
