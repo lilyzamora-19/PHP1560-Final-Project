@@ -13,8 +13,8 @@ estimation_players <- function(soccer_data) {
       games = n(),
       red_cards = sum(redCards, na.rm = TRUE),
       yellow_cards = sum(yellowCards, na.rm = TRUE),
-      red_rate = red_cards / games,
-      yellow_rate = yellow_cards / games)
+      red_rate = redCards / games,
+      yellow_rate = yellowCards / games)
   
   return(players)
 }
