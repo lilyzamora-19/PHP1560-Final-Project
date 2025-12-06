@@ -24,7 +24,7 @@ soccer_data <- na.omit(soccer_data)
 soccer_data <- subset(soccer_data, nIAT > 100)
 soccer_data <- subset(soccer_data, nExp > 100)
 
-#Average skin tone ratings between rater 1 and rater 2
+#Average skin tone ratings between rater 1 and rater 2, then categorize
 soccer_data <- soccer_data %>%
   mutate(avg_rating = (rater1 + rater2) / 2) %>%
   mutate(skin_tone = case_when(
