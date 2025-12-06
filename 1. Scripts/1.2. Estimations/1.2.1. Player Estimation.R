@@ -8,13 +8,15 @@
 
 estimation_players <- function(soccer_data) {
   players <- soccer_data %>%
-    group_by(player, position, avg_rating) %>%
+    group_by(player, position, skin_tone) %>%
     summarize(
       games = n(),
       red_cards = sum(redCards, na.rm = TRUE),
       yellow_cards = sum(yellowCards, na.rm = TRUE),
+      yellow_red_cards = sum(yellowReds, na.rm = TRUE),
       red_rate = redCards / games,
-      yellow_rate = yellowCards / games)
+      yellow_rate = yellowCards / games,
+      yellow_red_rate = yellow_red_cards / games)
   
   return(players)
 }
