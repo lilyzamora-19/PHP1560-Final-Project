@@ -2,14 +2,14 @@
 #' 
 #' @description This function estimates the amount of red cards given to 
 #' players given their skin color.
-#' @param1 soccer_data A data frame with our cleaned data.
+#' @param soccer_data A data frame with our cleaned data.
 #' @return a data frame with an rate of red and yellow cards with position
 #' and skin color average rating.
 
 estimation_players <- function(soccer_data) {
   players <- soccer_data %>%
     group_by(player, position, avg_rating) %>%
-    summarise(
+    summarize(
       games = n(),
       red_cards = sum(redCards, na.rm = TRUE),
       yellow_cards = sum(yellowCards, na.rm = TRUE),
