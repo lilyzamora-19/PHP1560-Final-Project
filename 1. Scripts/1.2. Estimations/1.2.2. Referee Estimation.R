@@ -34,3 +34,4 @@ estimation_referee <- function(soccer_data){
 }
 
 referee_estimate <- estimation_referee(soccer_data)
+referee_estimate <- na.omit(referee_estimate)
