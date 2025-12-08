@@ -27,9 +27,10 @@ soccer_data <- subset(soccer_data, nExp > 100)
 #Average skin tone ratings between rater 1 and rater 2, then categorize
 soccer_data <- soccer_data %>%
   mutate(avg_rating = (rater1 + rater2) / 2) %>%
-  mutate(skin_tone = case_when(
-    avg_rating >= 0.5 ~ "dark",
-    avg_rating < 0.5 ~ "light"))
+  mutate(skin_tone = case_when(avg_rating >= 0 & avg_rating < 0.25 ~ "very_light",
+                               avg_rating >= 0.25 & avg_rating < 0.50 ~ "light",
+                               avg_rating >= 0.50 & avg_rating < 0.75 ~ "dark",
+                               avg_rating >= 0.75 & avg_rating < 1 ~ "very_dark",
 
 #Rename positions to fit a 4-2-3-1 Soccer formation
 #This formation consists of 4 defenders (two centerbacks and two fullbacks),
