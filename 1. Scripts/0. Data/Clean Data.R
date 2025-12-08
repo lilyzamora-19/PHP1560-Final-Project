@@ -30,7 +30,7 @@ soccer_data <- soccer_data %>%
   mutate(skin_tone = case_when(avg_rating >= 0 & avg_rating < 0.25 ~ "very_light",
                                avg_rating >= 0.25 & avg_rating < 0.50 ~ "light",
                                avg_rating >= 0.50 & avg_rating < 0.75 ~ "dark",
-                               avg_rating >= 0.75 & avg_rating < 1 ~ "very_dark")
+                               avg_rating >= 0.75 & avg_rating < 1 ~ "very_dark"))
 
 #Rename positions to fit a 4-2-3-1 Soccer formation
 #This formation consists of 4 defenders (two centerbacks and two fullbacks),
