@@ -7,18 +7,30 @@
 #' the amount of cards given by a referee and the rate of different cards given.
 
 estimation_referee <- function(soccer_data){
+
+  clean_data$any_card <- (clean_data$yellowCards + clean_data$yellowReds + clean_data$redCards) > 0
+  
   referee <- soccer_data %>%
     group_by(refNum, skin_tone) %>%
     summarize(
       cards = n(),
-      red_cards = sum(redCards, na.rm = TRUE),
-      yellow_cards = sum(yellowCards, na.rm = TRUE),
-      yellow_red_cards = sum(yellowReds, na.rm = TRUE),
+      red_cards = sum(redCards > 0, na.rm = TRUE),
+      yellow_cards = sum(yellowCards > 0, na.rm = TRUE),
+      yellow_red_cards = sum(yellowReds > 0, na.rm = TRUE),
+      any_card = sum(any_card, na.rm = TRUE),
+      any_rate = any_card / cards,
       red_rate = red_cards / cards,
       yellow_rate = yellow_cards / cards,
       yellow_red_rate = yellow_red_cards / cards)
+      
 
-  return(referee)
+  referee_wide <- referee %>%
+    pivot_wider(id_cols = refNum,
+                names_from = skin_tone,
+                values_from = c(yellow_rate, yellow_red_rate, red_rate, any_rate),
+                names_glue = "{.value}_{skin_tone}")
+
+  return(referee_wide)
 }
 
 referee_estimate <- estimation_referee(soccer_data)
