@@ -8,7 +8,7 @@
 
 estimation_referee <- function(soccer_data){
 
-  clean_data$any_card <- (clean_data$yellowCards + clean_data$yellowReds + clean_data$redCards) > 0
+  soccer_data$any_card <- (soccer_data$yellowCards + soccer_data$yellowReds + soccer_data$redCards) > 0
   
   referee <- soccer_data %>%
     group_by(refNum, skin_tone) %>%
