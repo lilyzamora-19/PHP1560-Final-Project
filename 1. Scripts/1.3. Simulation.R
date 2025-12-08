@@ -4,7 +4,9 @@
 #' @param1
 #' @return
 
-sim_game <- function(player_estimate, referee_estimate, games) {
+sim_game <- function(player_estimate, referee_estimate, games, seed = NULL) {
+  
+  if (!is.null(seed)) set.seed(seed)
   
   # creating empty data frame to store game results
   results <- data.frame(game_id = integer(games),
@@ -50,4 +52,4 @@ sim_game <- function(player_estimate, referee_estimate, games) {
   return(results)
 }
 
-simulation_results <- sim_game(player_estimate, referee_estimate, games = 10)
+simulation_results <- sim_game(player_estimate, referee_estimate, games = 10, seed = 1)
