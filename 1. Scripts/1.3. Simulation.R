@@ -9,7 +9,7 @@ sim_game <- function(player_estimate, referee_estimate, games) {
   # creating empty data frame to store game results
   results <- data.frame(game_id = integer(games),
                         refNum = integer(games),
-                        total_red_cards = integer(games))
+                        total_cards = integer(games))
   
   for (i in 1:games) {
     
@@ -28,26 +28,26 @@ sim_game <- function(player_estimate, referee_estimate, games) {
     player_index <- c(def_index, att_mid_index, def_mid_index, strike_index, gk_index)
     team <- player_estimate[player_index,]
     
-    # starting off every player with 0 red cards
-    red_cards <- rep(0, nrow(team))
+    # starting off every player with 0 cards
+    cards <- rep(0, nrow(team))
     
     for (k in 1:nrow(team)) {
       team_skin_tone <- team$skin_tone[k]   # find skin tone for every player in team
       
-      col_name <- paste0("prob_red_", team_skin_tone)
+      col_name <- paste0("any_rate_", team_skin_tone) #take rate for getting a card
       
       prob <- ref_row[[col_name]]
       
-      red_cards[k] <- rbinom(1, size = 1, prob = prob)
+      cards[k] <- rbinom(1, size = 1, prob = prob)
     }
 
     results$game_id[i] <- i
     results$refNum[i] <- ref_id
-    results$total_red_cards[i] <- sum(red_cards)
+    results$total_cards[i] <- sum(cards)
+    results$team_skin_tone[i] <- team_skin_tone
     
   }
   return(results)
 }
 
-games <- 10
-simulation_results <- sim_game(player_estimate, referee_estimate, games)
+simulation_results <- sim_game(player_estimate, referee_estimate, games = 10)
