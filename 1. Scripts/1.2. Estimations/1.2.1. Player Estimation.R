@@ -22,6 +22,7 @@ estimation_players <- function(soccer_data) {
 }
 
 player_estimate <- estimation_players(soccer_data)
+player_estimate <- na.omit(player_estimate)
 
 # 
 #estimation_players <- function(soccer_data) {
