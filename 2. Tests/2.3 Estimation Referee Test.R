@@ -6,10 +6,10 @@
 
 # creating a test soccer data
 ref_test_data <- tibble(refNum = c(1, 1, 1, 2, 2),
-                               skin_tone = c("light", "dark", "dark", "light", "dark"),
-                               yellowCards = c(1, 0, 0, 0, 0),
-                               yellowReds = c(0, 1, 0, 0, 0),
-                               redCards = c(0, 0, 1, 0, 0))
+                        skin_tone = c("light", "dark", "dark", "light", "dark"),
+                        yellowCards = c(1, 0, 0, 0, 0),
+                        yellowReds = c(0, 1, 0, 0, 0),
+                        redCards = c(0, 0, 1, 0, 0))
 
 # running estimation_referee on test data
 ref_results <- estimation_referee(ref_test_data)
