@@ -1,6 +1,22 @@
 # estimation_referee test
 #
-# testing that the referees in referee_estimate matches referees in soccer_data,
-# output should be TRUE
+# create a smaller mock soccer data to tests if estimation_referee function
+# runs correctly. Code should run without error if function runs correctly.
 
-all(referee_estimate$refNum %in% unique(soccer_data$refNum))
+
+# creating a test soccer data
+ref_test_data <- tibble(refNum = c(1, 1, 1, 2, 2),
+                               skin_tone = c("light", "dark", "dark", "light", "dark"),
+                               yellowCards = c(1, 0, 0, 0, 0),
+                               yellowReds = c(0, 1, 0, 0, 0),
+                               redCards = c(0, 0, 1, 0, 0))
+
+# running estimation_referee on test data
+ref_results <- estimation_referee(ref_test_data)
+
+# testing to ensure output is a data frame
+expect_true(is.data.frame(ref_results))
+
+# testing to ensure that function should return one row per referee
+expect_equal(nrow(ref_results), length(unique(ref_test_data$refNum)))
+expect_true(all(ref_results$refNum %in% unique(ref_test_data$refNum)))
