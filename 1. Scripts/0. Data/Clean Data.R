@@ -5,6 +5,7 @@ library(tidyverse)
 library(dplyr)
 library(ggplot2)
 
+
 #Load in Data
 soccer_data <- read.csv("/Users/lilyzamora/Desktop/PHP 1560/Data/CrowdstormingDataJuly1st.csv")
 
