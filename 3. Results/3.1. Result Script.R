@@ -10,13 +10,13 @@ simresults_5000 <- simresults_5000 %>%
   mutate(proportion_cards_dark = any_cards_dark / total_cards) %>%
   mutate(proportion_cards_verydark = any_cards_verydark / total_cards)
 
-#Prevent NAs from Dividing by 0 for Proportions
+#Prevent NAs from Dividing by 0 for Proportions above
 simresults_5000[is.na(simresults_5000)] <- 0
 
 #Combining data frames to see if bias is a possible predictor
 simresults_5000_bias <- full_join(simresults_5000, soccer_data, by = "refNum")
 
-#Remove unnecessary columns
+#Remove unnecessary columns and remove NAs
 simresults_5000_bias <- subset(simresults_5000_bias, select = -c(12,13,14,15,16,17,18,19,26,27))
 
 simresults_5000_bias <- na.omit(simresults_5000_bias)
