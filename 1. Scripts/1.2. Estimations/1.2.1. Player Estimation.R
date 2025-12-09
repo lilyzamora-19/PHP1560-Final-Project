@@ -1,6 +1,6 @@
 #' Estimating Red Cards for Players on Skin Tones
 #' 
-#' @description This function estimates the amount of red cards given to 
+#' @description This function estimates the amount of different cards given to 
 #' players given their skin color.
 #' @param soccer_data A data frame with our cleaned data.
 #' @return a data frame with an rate of red and yellow cards with position
