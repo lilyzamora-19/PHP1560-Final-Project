@@ -16,3 +16,5 @@ table_gt <- tbl_summary(simresults_5000[,3:4],
               all_continuous() ~ "{median} ({mean}) {min} ({max})"))
 
 kable_table <- as_kable(table_gt)
+print(kable_table) #Do this in R Markdown File if we want this table
+
