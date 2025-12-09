@@ -5,7 +5,9 @@ simresults_5000 <- sim_game(player_estimate, referee_estimate, games = 5000, see
 
 #Taking the data frame from the results, let's look deeper into the results.
 
-#Table
+#------TABLES------#
+
+#Get GT Summary Table For Analysis 
 table_gt <- tbl_summary(simresults_5000[,3:4], 
             by = team_skin_tone,
             label = list(total_cards ~ "Total Cards"),
@@ -13,10 +15,13 @@ table_gt <- tbl_summary(simresults_5000[,3:4],
               all_continuous() ~ "{median} ({mean}) {min} ({max})"))
 print(table_gt)
 
+#Kable Table for R Markdown
 kable_table <- as_kable(table_gt)
 print(kable_table) #Do this in R Markdown File if we want this table
 
-#Graphs
+#------GRAPHS------#
+
+#Compare total cards for team skin tones with graph
 ggplot(simresults_5000, aes(x = team_skin_tone, y = total_cards)) +
   geom_col(color = "navy") +
   labs(x = "Overall Team Skin Tone",
@@ -26,7 +31,8 @@ ggplot(simresults_5000, aes(x = team_skin_tone, y = total_cards)) +
                               "very_dark" = "Very Dark", "very_light" = "Very Light")) +
   theme(plot.title = element_text(face = "bold", size = 15)) +
   theme_minimal() 
-  
+
+
 #Deeper Questions
 #With this simulation, is there a relationship
 
