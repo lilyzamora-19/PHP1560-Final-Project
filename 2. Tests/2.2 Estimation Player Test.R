@@ -1,7 +1,7 @@
 # estimation_player test
 #
-# creating a smaller mock soccer data set to test if estimation_player works.
-# The code should run without error. 
+# Creating a smaller mock soccer data set to test if estimation_player works.
+# The code should run without error if the function works correctly.
 
 # creating a test soccer data
 player_test_data <- tibble(player = c("Bob", "Bob", "Bob", "Sam", "Sam"),
