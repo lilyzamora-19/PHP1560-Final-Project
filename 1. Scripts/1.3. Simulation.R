@@ -11,7 +11,11 @@ sim_game <- function(player_estimate, referee_estimate, games, seed = NULL) {
   # creating empty data frame to store game results
   results <- data.frame(game_id = integer(games),
                         refNum = integer(games),
-                        total_cards = integer(games))
+                        total_cards = integer(games),
+                        any_cards_light = integer(games),
+                        any_cards_verylight = integer(games),
+                        any_cards_dark = integer(games),
+                        any_cards_verydark = integer(games))
   
   for (i in 1:games) {
     
@@ -32,21 +36,41 @@ sim_game <- function(player_estimate, referee_estimate, games, seed = NULL) {
     
     # starting off every player with 0 cards
     cards <- rep(0, nrow(team))
+    any_cards_light <- 0
+    any_cards_verylight <- 0
+    any_cards_dark <- 0
+    any_cards_verydark <- 0
     
     for (k in 1:nrow(team)) {
-      team_skin_tone <- team$skin_tone[k]   # find skin tone for every player in team
+      player_skin_tone <- team$skin_tone[k]   # find skin tone for every player in team
       
-      col_name <- paste0("any_rate_", team_skin_tone) #take rate for getting a card
+      col_name <- paste0("any_rate_", player_skin_tone) 
       
-      prob <- ref_row[[col_name]]
+      prob <- ref_row[[col_name]]  # take rate for getting a card
+      if (is.na(prob) || length(prob) == 0) prob <- 0  # setting prob to 0 if NA
       
-      cards[k] <- rbinom(1, size = 1, prob = prob)
+      cards[k] <- rbinom(1, size = 1, prob = prob) # card or no card
+
+      if (cards[k] == 1) {
+        if (player_skin_tone == "very_light") {
+          any_cards_verylight <- any_cards_verylight + 1
+        } else if (player_skin_tone == "light") {
+          any_cards_light <- any_cards_light + 1
+        } else if (player_skin_tone == "dark") {
+          any_cards_dark <- any_cards_dark + 1
+        } else if (player_skin_tone == "very_dark") {
+          any_cards_verydark <- any_cards_verydark + 1
+        }
+      }
     }
 
     results$game_id[i] <- i
     results$refNum[i] <- ref_id
     results$total_cards[i] <- sum(cards)
-    results$team_skin_tone[i] <- team_skin_tone
+    results$any_cards_verylight[i] <- any_cards_verylight
+    results$any_cards_light[i] <- any_cards_light
+    results$any_cards_dark[i] <- any_cards_dark
+    results$any_cards_verydark[i] <- any_cards_verydark
     
   }
   return(results)
