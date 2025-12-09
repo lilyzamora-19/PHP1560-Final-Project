@@ -6,6 +6,8 @@
 #' @return a data frame with an rate of red and yellow cards with position
 #' and skin color average rating.
 
+#Finding rate of getting each different type of card for every player
+#by summarizing and grouping for the appropriate variables.
 estimation_players <- function(soccer_data) {
   players <- soccer_data %>%
     group_by(player, position, skin_tone) %>%
