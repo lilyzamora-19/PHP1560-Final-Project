@@ -17,7 +17,9 @@ simresults_5000[is.na(simresults_5000)] <- 0
 simresults_5000_bias <- full_join(simresults_5000, soccer_data, by = "refNum")
 
 #Remove unnecessary columns
-simresults_5000_bias <- subset(simresults_5000, select = -c(12,13,14,15,16,17,18,19,26,27))
+simresults_5000_bias <- subset(simresults_5000_bias, select = -c(12,13,14,15,16,17,18,19,26,27))
+
+simresults_5000_bias <- na.omit(simresults_5000_bias)
 
 #Taking the data frame from the results, let's look deeper into the results.
 
@@ -46,7 +48,31 @@ kable_table <- as_kable(table_gt)
 print(kable_table) #Do this in R Markdown File if we want a kable version table
 
 #------GRAPHS------#
+ggplot(simresults_5000_bias, aes(meanIAT, any_cards_dark)) +
+  geom_smooth()
 
+#------TESTS------#
 
+#Look at correlation between the proportion of total cards called by referees
+#by skin tone and mean implicit bias score for the referees.
 
+cor(simresults_5000_bias$meanIAT, simresults_5000_bias$proportion_cards_verylight)
 
+cor(simresults_5000_bias$meanIAT, simresults_5000_bias$proportion_cards_light)
+
+cor(simresults_5000_bias$meanIAT, simresults_5000_bias$proportion_cards_dark)
+
+cor(simresults_5000_bias$meanIAT, simresults_5000_bias$proportion_cards_verydark)
+
+#Look at correlation between the proportion of total cards called by referees
+#by skin tone and mean explicit bias score for the referees.
+
+cor(simresults_5000_bias$meanExp, simresults_5000_bias$proportion_cards_verylight)
+
+cor(simresults_5000_bias$meanExp, simresults_5000_bias$proportion_cards_light)
+
+cor(simresults_5000_bias$meanExp, simresults_5000_bias$proportion_cards_dark)
+
+cor(simresults_5000_bias$meanExp, simresults_5000_bias$proportion_cards_verydark)
+
+#NOTE: A higher meanIAT and meanExp means more bias against black people vs white people.
