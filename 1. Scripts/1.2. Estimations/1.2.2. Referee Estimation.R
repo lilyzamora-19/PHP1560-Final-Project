@@ -1,6 +1,6 @@
 #'Estimating Red Card Probability of Referees
 #'
-#' @description estimates the probability that the referee gives a red card 
+#' @description estimates the probability that the referee gives a card 
 #' given the skin color of the players.
 #' @param soccer_data A data frame with our cleaned data.
 #' @return a data frame that will return referee number, skin tone of player,
