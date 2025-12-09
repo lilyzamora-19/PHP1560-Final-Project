@@ -81,4 +81,4 @@ sim_game <- function(player_estimate, referee_estimate, games, seed = NULL) {
   return(results)
 }
 
-simulation_results <- sim_game(player_estimate, referee_estimate, games = 10, seed = 1)
+simulation_results <- sim_game(player_estimate, referee_estimate, games, seed)
