@@ -18,9 +18,6 @@ soccer_data <- soccer_data[, c("playerShort", "player", "position", "yellowCards
                                "refNum", "meanIAT", "nIAT", "seIAT", "meanExp",
                                "nExp", "seExp")]
 
-#Remove NAs
-soccer_data <- na.omit(soccer_data)
-
 #Remove small sample sizes (less than 100?)
 
 soccer_data <- subset(soccer_data, nIAT > 100)
@@ -33,6 +30,9 @@ soccer_data <- soccer_data %>%
                                avg_rating >= 0.25 & avg_rating < 0.50 ~ "light",
                                avg_rating >= 0.50 & avg_rating < 0.75 ~ "dark",
                                avg_rating >= 0.75 & avg_rating <= 1 ~ "very_dark"))
+
+#Remove NAs
+soccer_data <- na.omit(soccer_data)
 
 #Rename positions to fit a 4-2-3-1 Soccer formation
 #This formation consists of 4 defenders (two centerbacks and two fullbacks),
