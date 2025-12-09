@@ -18,13 +18,15 @@ print(kable_table) #Do this in R Markdown File if we want this table
 
 #Graphs
 ggplot(simresults_5000, aes(x = team_skin_tone, y = total_cards)) +
-  geom_col() +
+  geom_col(color = "navy") +
   labs(x = "Overall Team Skin Tone",
        y = "Total Cards",
-       title = "Team Skin Tones vs. Total Cards Given 5000 Game Simulation") +
-  theme_minimal() +
+       title = "Team Skin Tones vs. Total Cards For 5000 Game Simulation") +
+  scale_x_discrete(labels = c("dark" = "Dark", "light" = "Light", 
+                              "very_dark" = "Very Dark", "very_light" = "Very Light")) +
+  theme(plot.title = element_text(face = "bold", size = 15)) +
+  theme_minimal() 
   
-
 #Deeper Questions
 #With this simulation, is there a relationship
 
