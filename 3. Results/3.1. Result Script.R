@@ -3,6 +3,22 @@
 #Utilizing a simulation of 5000 games
 simresults_5000 <- sim_game(player_estimate, referee_estimate, games = 5000, seed = 123)
 
+#See the proportion of total cards to each skin tone for analysis
+simresults_5000 <- simresults_5000 %>%
+  mutate(proportion_cards_light = any_cards_light / total_cards) %>%
+  mutate(proportion_cards_verylight = any_cards_verylight / total_cards) %>%
+  mutate(proportion_cards_dark = any_cards_dark / total_cards) %>%
+  mutate(proportion_cards_verydark = any_cards_verydark / total_cards)
+
+#Prevent NAs from Dividing by 0 for Proportions
+simresults_5000[is.na(simresults_5000)] <- 0
+
+#Combining data frames to see if bias is a possible predictor
+simresults_5000_bias <- full_join(simresults_5000, soccer_data, by = "refNum")
+
+#Remove unnecessary columns
+simresults_5000_bias <- subset(simresults_5000, select = -c(12,13,14,15,16,17,18,19,26,27))
+
 #Taking the data frame from the results, let's look deeper into the results.
 
 #------TABLES------#
@@ -15,32 +31,22 @@ table_gt <- tbl_summary(simresults_5000,
                          any_cards_dark ~ "Dark Skin Tone Total Cards",
                          any_cards_verydark ~ "Very Dark Skin Tone Total Cards",
                          game_id ~ "Game ID",
-                         refNum ~ "Referee Number"),
+                         refNum ~ "Referee Number",
+                         proportion_cards_light ~ "Prop. of Cards to Light Skin",
+                         proportion_cards_verylight ~ "Prop. of Cards to Very Light Skin",
+                         proportion_cards_dark ~ "Prop. of Cards to Dark Skin",
+                         proportion_cards_verydark ~ "Prop. of Cards to Very Dark Skin"),
             statistic = list(
-              all_continuous() ~ "{median} ({mean}) {min} ({max})",
+              all_continuous() ~ "{median}% ({mean}%) {sd}",
               all_categorical() ~ "{n} ({p}%)"))
 print(table_gt)
 
 #Kable Table for R Markdown
 kable_table <- as_kable(table_gt)
-print(kable_table) #Do this in R Markdown File if we want this table
+print(kable_table) #Do this in R Markdown File if we want a kable version table
 
 #------GRAPHS------#
 
-#Compare total cards for team skin tones with graph
-ggplot(simresults_5000, aes(x = team_skin_tone, y = total_cards)) +
-  geom_col(color = "navy") +
-  labs(x = "Overall Team Skin Tone",
-       y = "Total Cards",
-       title = "Team Skin Tones vs. Total Cards For 5000 Game Simulation") +
-  scale_x_discrete(labels = c("dark" = "Dark", "light" = "Light", 
-                              "very_dark" = "Very Dark", "very_light" = "Very Light")) +
-  theme(plot.title = element_text(face = "bold", size = 15)) +
-  theme_minimal() 
 
 
-
-
-#Deeper Questions
-#With this simulation, is there a relationship
 
