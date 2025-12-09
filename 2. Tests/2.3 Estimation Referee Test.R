@@ -1,7 +1,7 @@
 # estimation_referee test
 #
-# create a smaller mock soccer data to tests if estimation_referee function
-# runs correctly. Code should run without error if function runs correctly.
+# creating a smaller mock soccer data set to test if estimation_referee function
+# works. Code should run without error if function runs correctly.
 
 
 # creating a test soccer data
