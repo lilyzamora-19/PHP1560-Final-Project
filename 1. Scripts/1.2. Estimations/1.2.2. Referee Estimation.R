@@ -8,8 +8,11 @@
 
 estimation_referee <- function(soccer_data){
 
+  #Ensuring that total cards being given is above 0 since we don't want to test
+  #for no cards.
   soccer_data$any_card <- (soccer_data$yellowCards + soccer_data$yellowReds + soccer_data$redCards) > 0
-  
+
+  #Calculating rates of getting cards for all different card types.
   referee <- soccer_data %>%
     group_by(refNum, skin_tone) %>%
     summarize(
@@ -23,7 +26,7 @@ estimation_referee <- function(soccer_data){
       yellow_rate = yellow_cards / cards,
       yellow_red_rate = yellow_red_cards / cards)
       
-
+  #Widen dataframe to make it easier to read and utilize later
   referee_wide <- referee %>%
     pivot_wider(id_cols = refNum,
                 names_from = skin_tone,
