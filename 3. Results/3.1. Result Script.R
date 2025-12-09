@@ -3,6 +3,37 @@
 #Utilizing a simulation of 5000 games
 simresults_5000 <- sim_game(player_estimate, referee_estimate, games = 5000, seed = 123)
 
+# See the proportion of total cards to each skin tone for analysis (Overall)
+sim_results5000_all <- simresults_5000 %>%
+  summarize(total_cards_all = sum(total_cards),
+            cards_verylight_all = sum(any_cards_verylight),
+            cards_light_all = sum(any_cards_light),
+            cards_dark_all = sum(any_cards_dark),
+            cards_verydark_all = sum(any_cards_verydark),
+            proportion_cards_verylight = cards_verylight_all / total_cards_all,
+            proportion_cards_light = cards_light_all / total_cards_all,
+            proportion_cards_dark = cards_dark_all / total_cards_all,
+            proportion_cards_verydark = cards_verydark_all / total_cards_all)
+
+# Get GT Summary Table For Analysis (Overall)
+card_summary_all <- data.frame(skin_tone = c("Very Light", "Light", "Dark", "Very Dark"),
+                           total_cards = c(sim_results5000$cards_verylight_all,
+                                           sim_results5000$cards_light_all,
+                                           sim_results5000$cards_dark_all,
+                                           sim_results5000$cards_verydark_all),
+                           proportion = c(sim_results5000$proportion_cards_verylight,
+                                          sim_results5000$proportion_cards_light,
+                                          sim_results5000$proportion_cards_dark,
+                                          sim_results5000$proportion_cards_verydark))
+table_gt_all <- tbl_summary(data = card_summary, by = skin_tone,
+                        include = c(total_cards, proportion),
+                        label = list(total_cards ~ "Total Cards",
+                                     proportion ~ "Proportion of Total Cards"),
+                        type = list(total_cards ~ "continuous",
+                                    proportion ~ "continuous"),
+                        statistic = list(all_continuous() ~ "{mean}"))
+print(table_gt_all)
+
 #See the proportion of total cards to each skin tone for analysis
 simresults_5000 <- simresults_5000 %>%
   mutate(proportion_cards_light = any_cards_light / total_cards) %>%
