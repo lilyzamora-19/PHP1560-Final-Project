@@ -48,8 +48,27 @@ kable_table <- as_kable(table_gt)
 print(kable_table) #Do this in R Markdown File if we want a kable version table
 
 #------GRAPHS------#
-ggplot(simresults_5000_bias, aes(meanIAT, any_cards_dark)) +
-  geom_smooth()
+par(mfrow = c(2,2))
+
+hist(simresults_5000$proportion_cards_verylight,
+     main = "Frequency of Prop. of Cards to Very Light Skin",
+     xlab = "Prop. of Cards to Very Light Skin",
+     col = "lightblue")
+
+hist(simresults_5000$proportion_cards_light,
+     main = "Frequency of Prop. of Cards to Light Skin",
+     xlab = "Prop. of Cards to Light Skin",
+     col = "lightblue")
+
+hist(simresults_5000$proportion_cards_dark,
+     main = "Frequency of Prop. of Cards to Dark Skin",
+     xlab = "Prop. of Cards to Dark Skin",
+     col = "lightblue")
+
+hist(simresults_5000$proportion_cards_verydark,
+     main = "Frequency of Prop. of Cards to Very Dark Skin",
+     xlab = "Prop. of Cards to Very Dark Skin",
+     col = "lightblue")
 
 #------TESTS------#
 
