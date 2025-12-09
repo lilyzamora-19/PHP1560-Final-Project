@@ -18,7 +18,7 @@ soccer_data <- soccer_data[, c("playerShort", "player", "position", "yellowCards
                                "refNum", "meanIAT", "nIAT", "seIAT", "meanExp",
                                "nExp", "seExp")]
 
-#Remove small sample sizes (less than 100?)
+#Remove small sample sizes (less than 100)
 
 soccer_data <- subset(soccer_data, nIAT > 100)
 soccer_data <- subset(soccer_data, nExp > 100)
