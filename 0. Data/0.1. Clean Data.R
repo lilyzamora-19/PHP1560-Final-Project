@@ -6,6 +6,7 @@ library(dplyr)
 library(ggplot2)
 library(knitr)
 library(gtsummary)
+library(testthat)
 
 #Load in Data and Fix Pathname as Needed
 soccer_data <- read.csv("/Users/lilyzamora/Desktop/PHP 1560/Data/CrowdstormingDataJuly1st.csv")
