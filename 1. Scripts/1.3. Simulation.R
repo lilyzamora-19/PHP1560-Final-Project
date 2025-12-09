@@ -1,8 +1,13 @@
-#' Simulation
+#' Simulating Soccer Games
 #' 
-#' @description
-#' @param1
-#' @return
+#' @description This function simulates soccer games with randomly selected players (following the 4-3-2-1 soccer formation) and referee
+#' to examine whether referees disproportionately give out cards to players of different skin tones
+#'
+#' @param1 player_estimate A data frame containing the columns: player, position, and skin_tone.
+#' @param2 referee_estimate A data frame containing the columns: refNum, any_rate_very_light, any_rate_light, any_rate_dark, any_rate_very_dark
+#' @param3 games An integer that represents the number of games to simulate
+#' @param4 seed A seed to reproduce simulation results
+#' @return A data frame with the columns: game_id, refNum, any_cards_verylight, any_cards_light, any_cards_dark, any_cards_verydark, total_cards
 
 sim_game <- function(player_estimate, referee_estimate, games, seed = NULL) {
   
